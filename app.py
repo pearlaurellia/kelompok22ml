@@ -66,23 +66,31 @@ st.markdown("""
     
     /* Sidebar styling */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #2D3142 0%, #4F5D75 100%);
+        background: #FFFFFF;
     }
     
-    [data-testid="stSidebar"] * {
-        color: #FFFFFF !important;
-    }
-    
-    [data-testid="stSidebar"] .stSelectbox label,
-    [data-testid="stSidebar"] .stMarkdown {
-        color: #FFFFFF !important;
+    [data-testid="stSidebar"] .stMarkdown,
+    [data-testid="stSidebar"] .stMarkdown p,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] .stSelectbox label {
+        color: #2D3142 !important;
     }
     
     /* Sidebar headers */
     [data-testid="stSidebar"] h2 {
-        color: #EF8354 !important;
+        color: #2D3142 !important;
         border-bottom: 2px solid #EF8354;
         padding-bottom: 0.5rem;
+    }
+    
+    /* Sidebar selectbox styling */
+    [data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #2D3142 !important;
+    }
+    
+    [data-testid="stSidebar"] .stSelectbox input {
+        color: #2D3142 !important;
     }
     
     /* Input fields */
