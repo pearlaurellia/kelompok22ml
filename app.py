@@ -273,15 +273,7 @@ def load_model(model_path="outputs/pipeline_RandomForest.joblib"):
         return None
 
 # Model selection at the top
-st.markdown("""
-<div style="background: linear-gradient(135deg, #2D3142 0%, #4F5D75 100%); 
-            padding: 1rem 1.5rem; border-radius: 12px; margin-bottom: 1rem; 
-            box-shadow: 0 4px 15px rgba(45, 49, 66, 0.2);">
-    <p style="color: #FFFFFF !important; margin: 0; font-size: 1.1rem; font-weight: 600;">🤖 Model Selection</p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("<div style='margin-bottom: 1rem;'></div>", unsafe_allow_html=True)
+st.subheader("Model Selection")
 
 model_col1, model_col2 = st.columns([3, 1])
 
