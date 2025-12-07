@@ -31,6 +31,7 @@ st.markdown("""
     .main .block-container {
         padding: 2rem 3rem;
         background: #FFFFFF;
+        max-width: 1400px;
     }
     
     /* Title styling */
@@ -64,39 +65,22 @@ st.markdown("""
         margin-bottom: 2rem;
     }
     
-    /* Sidebar styling */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #2D3142 0%, #4F5D75 100%);
+    /* Model selection card */
+    .model-card {
+        background: linear-gradient(135deg, #2D3142 0%, #4F5D75 100%);
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(45, 49, 66, 0.2);
     }
     
-    [data-testid="stSidebar"] .stMarkdown,
-    [data-testid="stSidebar"] .stMarkdown p,
-    [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] .stSelectbox label {
-        color: #FFFFFF !important;
-    }
-    
-    /* Sidebar headers */
-    [data-testid="stSidebar"] h2 {
+    .model-card h3 {
         color: #EF8354 !important;
-        border-bottom: 2px solid #EF8354;
-        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
     }
     
-    /* Sidebar selectbox styling */
-    [data-testid="stSidebar"] .stSelectbox > div > div {
-        background-color: white !important;
-        color: #2D3142 !important;
-        border: 2px solid #BFC0C0;
-    }
-    
-    [data-testid="stSidebar"] .stSelectbox input {
-        color: #2D3142 !important;
-    }
-    
-    /* Sidebar selectbox dropdown text (the selected option) */
-    [data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] > div {
-        color: #2D3142 !important;
+    .model-card label {
+        color: #FFFFFF !important;
     }
     
     /* Input fields */
@@ -288,24 +272,38 @@ def load_model(model_path="outputs/pipeline_RandomForest.joblib"):
         st.error(f"Model file not found at {model_path}. Please train the model first using tes_full.py")
         return None
 
-# Model selection
-st.sidebar.header("Model Selection")
-model_options = {
-    "Random Forest": "outputs/pipeline_RandomForest.joblib",
-    "Random Forest (GridSearch)": "outputs/RandomForest_GridSearch.joblib",
-    "Logistic Regression": "outputs/pipeline_LogisticRegression.joblib",
-    "Decision Tree": "outputs/pipeline_DecisionTree.joblib",
-    "XGBoost": "outputs/pipeline_XGBoost.joblib"
-}
+# Model selection at the top
+st.markdown("""
+<div style="background: linear-gradient(135deg, #2D3142 0%, #4F5D75 100%); 
+            padding: 2rem; border-radius: 15px; margin-bottom: 2rem; 
+            box-shadow: 0 4px 15px rgba(45, 49, 66, 0.2);">
+    <h3 style="color: #EF8354 !important; margin-bottom: 1rem; margin-top: 0;">🤖 Model Selection</h3>
+</div>
+""", unsafe_allow_html=True)
 
-selected_model = st.sidebar.selectbox("Choose a model:", list(model_options.keys()))
-model_path = model_options[selected_model]
+model_col1, model_col2 = st.columns([3, 1])
 
-# Load model
-model = load_model(model_path)
+with model_col1:
+    model_options = {
+        "Random Forest": "outputs/pipeline_RandomForest.joblib",
+        "Random Forest (GridSearch)": "outputs/RandomForest_GridSearch.joblib",
+        "Logistic Regression": "outputs/pipeline_LogisticRegression.joblib",
+        "Decision Tree": "outputs/pipeline_DecisionTree.joblib",
+        "XGBoost": "outputs/pipeline_XGBoost.joblib"
+    }
+    
+    selected_model = st.selectbox("Choose a model:", list(model_options.keys()))
+    model_path = model_options[selected_model]
+
+with model_col2:
+    st.markdown("<br>", unsafe_allow_html=True)
+    # Load model
+    model = load_model(model_path)
 
 if model is not None:
-    st.sidebar.success(f"✅ {selected_model} loaded successfully!")
+    st.success(f"✅ {selected_model} loaded successfully!")
+    
+    st.markdown("---")
     
     # Create two columns for input
     col1, col2 = st.columns(2)
