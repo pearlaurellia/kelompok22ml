@@ -66,19 +66,19 @@ st.markdown("""
     
     /* Sidebar styling */
     [data-testid="stSidebar"] {
-        background: #FFFFFF;
+        background: linear-gradient(180deg, #2D3142 0%, #4F5D75 100%);
     }
     
     [data-testid="stSidebar"] .stMarkdown,
     [data-testid="stSidebar"] .stMarkdown p,
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] .stSelectbox label {
-        color: #2D3142 !important;
+        color: #FFFFFF !important;
     }
     
     /* Sidebar headers */
     [data-testid="stSidebar"] h2 {
-        color: #2D3142 !important;
+        color: #EF8354 !important;
         border-bottom: 2px solid #EF8354;
         padding-bottom: 0.5rem;
     }
@@ -87,9 +87,15 @@ st.markdown("""
     [data-testid="stSidebar"] .stSelectbox > div > div {
         background-color: white !important;
         color: #2D3142 !important;
+        border: 2px solid #BFC0C0;
     }
     
     [data-testid="stSidebar"] .stSelectbox input {
+        color: #2D3142 !important;
+    }
+    
+    /* Sidebar selectbox dropdown text (the selected option) */
+    [data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] > div {
         color: #2D3142 !important;
     }
     
