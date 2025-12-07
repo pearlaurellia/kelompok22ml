@@ -277,7 +277,7 @@ st.markdown("""
 <div style="background: linear-gradient(135deg, #2D3142 0%, #4F5D75 100%); 
             padding: 1rem 1.5rem; border-radius: 12px; margin-bottom: 1rem; 
             box-shadow: 0 4px 15px rgba(45, 49, 66, 0.2);">
-    <h4 style="color: #FFFFFF !important; margin-bottom: 0; margin-top: 0; font-size: 1.1rem; font-weight: 600;">🤖 Model Selection</h4>
+    <p style="color: #FFFFFF !important; margin: 0; font-size: 1.1rem; font-weight: 600;">🤖 Model Selection</p>
 </div>
 """, unsafe_allow_html=True)
 
