@@ -275,9 +275,9 @@ def load_model(model_path="outputs/pipeline_RandomForest.joblib"):
 # Model selection at the top
 st.markdown("""
 <div style="background: linear-gradient(135deg, #2D3142 0%, #4F5D75 100%); 
-            padding: 2rem; border-radius: 15px; margin-bottom: 1rem; 
+            padding: 1rem 1.5rem; border-radius: 12px; margin-bottom: 1rem; 
             box-shadow: 0 4px 15px rgba(45, 49, 66, 0.2);">
-    <h3 style="color: #FFFFFF !important; margin-bottom: 0; margin-top: 0; font-size: 1.5rem;">🤖 Model Selection</h3>
+    <h4 style="color: #FFFFFF !important; margin-bottom: 0; margin-top: 0; font-size: 1.1rem; font-weight: 600;">🤖 Model Selection</h4>
 </div>
 """, unsafe_allow_html=True)
 
