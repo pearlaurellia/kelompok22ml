@@ -3,7 +3,6 @@ import joblib
 import pandas as pd
 import numpy as np
 from pathlib import Path
-import plotly.graph_objects as go
 from datetime import datetime
 
 # Page config
@@ -18,17 +17,38 @@ st.set_page_config(
 st.markdown("""
     <style>
     .main-header {
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 3.5rem;
+        font-weight: 800;
         color: #1f77b4;
         text-align: center;
         margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     .sub-header {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         color: #666;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
+        font-weight: 400;
+    }
+    h3 {
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        color: #2c3e50;
+        margin-top: 1.5rem !important;
+    }
+    h4 {
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
+        color: #34495e;
+    }
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
     }
     .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -433,34 +453,38 @@ if model is not None:
                     )
                 
                 with col2:
-                    # Gauge chart
-                    fig = go.Figure(go.Indicator(
-                        mode = "gauge+number+delta",
-                        value = prediction_proba[1] * 100,
-                        domain = {'x': [0, 1], 'y': [0, 1]},
-                        title = {'text': "Subscription Probability", 'font': {'size': 20}},
-                        delta = {'reference': 50, 'increasing': {'color': "green"}},
-                        gauge = {
-                            'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"},
-                            'bar': {'color': "darkblue"},
-                            'bgcolor': "white",
-                            'borderwidth': 2,
-                            'bordercolor': "gray",
-                            'steps': [
-                                {'range': [0, 30], 'color': '#ffcccc'},
-                                {'range': [30, 70], 'color': '#ffffcc'},
-                                {'range': [70, 100], 'color': '#ccffcc'}
-                            ],
-                            'threshold': {
-                                'line': {'color': "red", 'width': 4},
-                                'thickness': 0.75,
-                                'value': 50
-                            }
-                        }
-                    ))
+                    # Simple progress bar visualization
+                    st.markdown("#### Confidence Meter")
                     
-                    fig.update_layout(height=300, margin=dict(l=20, r=20, t=50, b=20))
-                    st.plotly_chart(fig, use_container_width=True)
+                    # Create visual representation with colored boxes
+                    prob_yes = prediction_proba[1] * 100
+                    prob_no = prediction_proba[0] * 100
+                    
+                    # Yes probability bar
+                    st.markdown("**Will Subscribe:**")
+                    st.progress(prediction_proba[1])
+                    st.markdown(f"<p style='font-size: 24px; font-weight: bold; color: {'green' if prob_yes > 50 else 'orange'};'>{prob_yes:.1f}%</p>", unsafe_allow_html=True)
+                    
+                    st.markdown("---")
+                    
+                    # No probability bar
+                    st.markdown("**Will NOT Subscribe:**")
+                    st.progress(prediction_proba[0])
+                    st.markdown(f"<p style='font-size: 24px; font-weight: bold; color: {'red' if prob_no > 50 else 'orange'};'>{prob_no:.1f}%</p>", unsafe_allow_html=True)
+                    
+                    # Confidence level indicator
+                    confidence = max(prediction_proba)
+                    st.markdown("---")
+                    st.markdown("**Model Confidence:**")
+                    
+                    if confidence > 0.8:
+                        st.success(f"🟢 Very High: {confidence*100:.1f}%")
+                    elif confidence > 0.65:
+                        st.info(f"🔵 High: {confidence*100:.1f}%")
+                    elif confidence > 0.55:
+                        st.warning(f"🟡 Moderate: {confidence*100:.1f}%")
+                    else:
+                        st.error(f"🔴 Low: {confidence*100:.1f}%")
                 
                 # Insights
                 st.markdown("### 💡 Key Insights")
@@ -499,23 +523,86 @@ if model is not None:
     # TAB 2: Batch Prediction
     with tab2:
         st.markdown("### 📁 Batch Prediction")
-        st.info("Upload a CSV file with multiple customer records for bulk predictions. The file should have the same format as the training data.")
+        
+        # How it works section
+        st.markdown("#### 🤔 How Does Batch Prediction Work?")
+        
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
+            st.markdown("""
+            **Batch prediction** allows you to predict subscription likelihood for **hundreds or thousands of customers at once**, instead of entering data one by one.
+            
+            **Process:**
+            1. 📄 **Prepare your data** in CSV format with customer information
+            2. ⬆️ **Upload** the CSV file to this application
+            3. 🤖 **AI processes** all records automatically
+            4. 📊 **Get results** with predictions and probabilities for each customer
+            5. 📥 **Download** results for further analysis or action
+            
+            **Use Cases:**
+            - 🎯 Score entire customer database for targeted campaigns
+            - 📈 Prioritize leads based on subscription probability
+            - 💼 Plan marketing budgets and resource allocation
+            - 📞 Create calling lists ordered by likelihood to convert
+            """)
+        
+        with col2:
+            st.markdown("""
+            **Example Workflow:**
+            
+            ```
+            Input CSV (1000 customers)
+                    ↓
+            [Upload to application]
+                    ↓
+            [ML model processes each row]
+                    ↓
+            Output: Predictions + Probabilities
+                    ↓
+            Filter high-probability customers (>70%)
+                    ↓
+            Download targeted list for campaign
+            ```
+            
+            **Benefits:**
+            - ⚡ **Fast:** Process thousands in seconds
+            - 🎯 **Accurate:** Same ML model as single prediction
+            - 💰 **Cost-effective:** Focus efforts on best leads
+            - 📊 **Data-driven:** Make decisions based on AI insights
+            """)
+        
+        st.divider()
         
         # File format guide
-        with st.expander("📋 CSV Format Guide"):
+        st.markdown("#### 📋 CSV File Format Requirements")
+        
+        with st.expander("📖 View Required Columns & Format"):
             st.markdown("""
-            **Required columns:**
-            - age, job, marital, education, default, housing, loan
-            - contact, month, day_of_week, duration, campaign, pdays, previous, poutcome
-            - emp.var.rate, cons.price.idx, cons.conf.idx, euribor3m, nr.employed
+            **Required columns (must include all):**
+            - `age`, `job`, `marital`, `education`, `default`, `housing`, `loan`
+            - `contact`, `month`, `day_of_week`, `duration`, `campaign`, `pdays`, `previous`, `poutcome`
+            - `emp.var.rate`, `cons.price.idx`, `cons.conf.idx`, `euribor3m`, `nr.employed`
             
-            **Separator:** Use semicolon (;) as the delimiter
+            **Important:**
+            - ✅ Use **semicolon (;)** as separator
+            - ✅ Column names must match exactly (case-sensitive)
+            - ✅ Use raw values (e.g., "admin." not "Administrative")
+            - ✅ No missing values allowed
             
-            **Example first row:**
+            **Example header row:**
             ```
             age;job;marital;education;default;housing;loan;contact;month;day_of_week;duration;campaign;pdays;previous;poutcome;emp.var.rate;cons.price.idx;cons.conf.idx;euribor3m;nr.employed
             ```
+            
+            **Example data row:**
+            ```
+            35;admin.;married;university.degree;no;yes;no;cellular;may;mon;180;2;999;0;nonexistent;1.1;93.994;-36.4;4.857;5191.0
+            ```
             """)
+        
+        st.markdown("#### ⬆️ Upload Your Data")
+        st.info("💡 Tip: You can use the training dataset (bank-additional-full.csv) as a template or test file!")
         
         uploaded_file = st.file_uploader(
             "Choose a CSV file",
