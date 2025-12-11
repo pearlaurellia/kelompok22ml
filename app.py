@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Page config
 st.set_page_config(
-    page_title="Bank Marketing AI Predictor",
+    page_title="Bank Marketing Predictor",
     page_icon="🏦",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -17,31 +17,36 @@ st.set_page_config(
 st.markdown("""
     <style>
     .main-header {
-        font-size: 4rem;
+        font-size: 5.5rem;
         font-weight: 900;
         color: #1f77b4;
         text-align: center;
-        margin-bottom: 0.5rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        line-height: 1.2;
+        margin-bottom: 1rem;
+        margin-top: 0;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+        line-height: 1.1;
+        letter-spacing: -1px;
     }
     .sub-header {
-        font-size: 1.3rem;
-        color: #666;
+        font-size: 1.4rem;
+        color: #555;
         text-align: center;
-        margin-bottom: 2.5rem;
+        margin-bottom: 3rem;
         font-weight: 400;
+        line-height: 1.5;
     }
     h3 {
-        font-size: 1.8rem !important;
+        font-size: 1.6rem !important;
         font-weight: 700 !important;
         color: #2c3e50;
         margin-top: 1.5rem !important;
+        margin-bottom: 1rem !important;
     }
     h4 {
-        font-size: 1.3rem !important;
+        font-size: 1.2rem !important;
         font-weight: 600 !important;
         color: #34495e;
+        margin-top: 1rem !important;
     }
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
@@ -729,4 +734,4 @@ with col2:
 with col3:
     st.markdown("**Dataset:** UCI Bank Marketing")
 
-st.caption("© 2024 Bank Marketing AI Predictor | Powered by Machine Learning")
+st.caption("© 2024 Bank Marketing Predictor | Powered by Machine Learning")
