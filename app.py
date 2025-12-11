@@ -36,14 +36,14 @@ st.markdown("""
         line-height: 1.5;
     }
     h3 {
-        font-size: 1.6rem !important;
-        font-weight: 700 !important;
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
         color: #2c3e50;
         margin-top: 1.5rem !important;
         margin-bottom: 1rem !important;
     }
     h4 {
-        font-size: 1.2rem !important;
+        font-size: 1.1rem !important;
         font-weight: 600 !important;
         color: #34495e;
         margin-top: 1rem !important;
