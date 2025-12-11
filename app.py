@@ -523,61 +523,10 @@ if model is not None:
     # TAB 2: Batch Prediction
     with tab2:
         st.markdown("### 📁 Batch Prediction")
-        
-        # How it works section
-        st.markdown("#### 🤔 How Does Batch Prediction Work?")
-        
-        col1, col2 = st.columns([1, 1])
-        
-        with col1:
-            st.markdown("""
-            **Batch prediction** allows you to predict subscription likelihood for **hundreds or thousands of customers at once**, instead of entering data one by one.
-            
-            **Process:**
-            1. 📄 **Prepare your data** in CSV format with customer information
-            2. ⬆️ **Upload** the CSV file to this application
-            3. 🤖 **AI processes** all records automatically
-            4. 📊 **Get results** with predictions and probabilities for each customer
-            5. 📥 **Download** results for further analysis or action
-            
-            **Use Cases:**
-            - 🎯 Score entire customer database for targeted campaigns
-            - 📈 Prioritize leads based on subscription probability
-            - 💼 Plan marketing budgets and resource allocation
-            - 📞 Create calling lists ordered by likelihood to convert
-            """)
-        
-        with col2:
-            st.markdown("""
-            **Example Workflow:**
-            
-            ```
-            Input CSV (1000 customers)
-                    ↓
-            [Upload to application]
-                    ↓
-            [ML model processes each row]
-                    ↓
-            Output: Predictions + Probabilities
-                    ↓
-            Filter high-probability customers (>70%)
-                    ↓
-            Download targeted list for campaign
-            ```
-            
-            **Benefits:**
-            - ⚡ **Fast:** Process thousands in seconds
-            - 🎯 **Accurate:** Same ML model as single prediction
-            - 💰 **Cost-effective:** Focus efforts on best leads
-            - 📊 **Data-driven:** Make decisions based on AI insights
-            """)
-        
-        st.divider()
+        st.info("Upload a CSV file with multiple customer records for bulk predictions. The file should have the same format as the training data.")
         
         # File format guide
-        st.markdown("#### 📋 CSV File Format Requirements")
-        
-        with st.expander("📖 View Required Columns & Format"):
+        with st.expander("📋 CSV Format Requirements"):
             st.markdown("""
             **Required columns (must include all):**
             - `age`, `job`, `marital`, `education`, `default`, `housing`, `loan`
@@ -590,19 +539,18 @@ if model is not None:
             - ✅ Use raw values (e.g., "admin." not "Administrative")
             - ✅ No missing values allowed
             
-            **Example header row:**
+            **Example header:**
             ```
             age;job;marital;education;default;housing;loan;contact;month;day_of_week;duration;campaign;pdays;previous;poutcome;emp.var.rate;cons.price.idx;cons.conf.idx;euribor3m;nr.employed
             ```
             
-            **Example data row:**
+            **Example data:**
             ```
             35;admin.;married;university.degree;no;yes;no;cellular;may;mon;180;2;999;0;nonexistent;1.1;93.994;-36.4;4.857;5191.0
             ```
             """)
         
-        st.markdown("#### ⬆️ Upload Your Data")
-        st.info("💡 Tip: You can use the training dataset (bank-additional-full.csv) as a template or test file!")
+        st.markdown("#### ⬆️ Upload Your File")
         
         uploaded_file = st.file_uploader(
             "Choose a CSV file",
@@ -737,22 +685,6 @@ if model is not None:
                 }).highlight_max(axis=0, subset=['Accuracy', 'Precision', 'Recall', 'F1-Score']),
                 use_container_width=True
             )
-            
-            # Visualizations
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                if Path("outputs/roc_comparison.png").exists():
-                    st.image("outputs/roc_comparison.png", caption="ROC Curve Comparison", use_container_width=True)
-            
-            with col2:
-                if Path("outputs/pr_comparison.png").exists():
-                    st.image("outputs/pr_comparison.png", caption="Precision-Recall Curve", use_container_width=True)
-            
-            # Feature importance
-            if Path("outputs/feature_importances_randomforest.png").exists():
-                st.markdown("#### 🎯 Feature Importance (Random Forest)")
-                st.image("outputs/feature_importances_randomforest.png", use_container_width=True)
         
         else:
             st.info("No performance metrics found. Train models using `tes_full.py` to generate performance reports.")
