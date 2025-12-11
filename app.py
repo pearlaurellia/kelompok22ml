@@ -17,43 +17,58 @@ st.set_page_config(
 st.markdown("""
     <style>
     .main-header {
-        font-size: 5.5rem;
+        font-size: 3.8rem;
         font-weight: 900;
         color: #1f77b4;
         text-align: center;
-        margin-bottom: 1rem;
-        margin-top: 0;
+        margin-bottom: 0.3rem;
+        margin-top: 1rem;
         text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
         line-height: 1.1;
         letter-spacing: -1px;
     }
     .sub-header {
-        font-size: 1.4rem;
+        font-size: 1.15rem;
         color: #555;
         text-align: center;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
         font-weight: 400;
         line-height: 1.5;
     }
-    h3 {
+    /* Sidebar styling */
+    section[data-testid="stSidebar"] {
+        font-size: 0.9rem;
+    }
+    section[data-testid="stSidebar"] h1 {
         font-size: 1.3rem !important;
-        font-weight: 600 !important;
+    }
+    section[data-testid="stSidebar"] h2 {
+        font-size: 1.1rem !important;
+    }
+    section[data-testid="stSidebar"] h3 {
+        font-size: 1rem !important;
+    }
+    /* Main content headers */
+    .main h3 {
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
         color: #2c3e50;
-        margin-top: 1.5rem !important;
+        margin-top: 2rem !important;
         margin-bottom: 1rem !important;
     }
-    h4 {
-        font-size: 1.1rem !important;
+    .main h4 {
+        font-size: 1.15rem !important;
         font-weight: 600 !important;
         color: #34495e;
         margin-top: 1rem !important;
     }
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
     }
     .stTabs [data-baseweb="tab"] {
         height: 50px;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 600;
     }
     .metric-card {
