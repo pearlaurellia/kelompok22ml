@@ -17,12 +17,13 @@ st.set_page_config(
 st.markdown("""
     <style>
     .main-header {
-        font-size: 3.5rem;
-        font-weight: 800;
+        font-size: 4rem;
+        font-weight: 900;
         color: #1f77b4;
         text-align: center;
         margin-bottom: 0.5rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        line-height: 1.2;
     }
     .sub-header {
         font-size: 1.3rem;
@@ -131,7 +132,7 @@ DAY_LABELS = {
 }
 
 # Header
-st.markdown('<p class="main-header">🏦 Bank Marketing AI Predictor</p>', unsafe_allow_html=True)
+st.markdown('<p class="main-header">🏦 Bank Marketing Predictor</p>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Predict customer subscription likelihood for term deposits using machine learning</p>', unsafe_allow_html=True)
 
 # Sidebar - Model Selection
