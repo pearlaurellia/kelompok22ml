@@ -13,73 +13,181 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS - EXTREME TITLE SIZE
+# Custom CSS - Proper UI/UX Hierarchy
 st.markdown("""
     <style>
-    /* SHRINK EVERYTHING IN SIDEBAR */
+    /* Typography Scale (following 1.25 ratio - Major Third) */
+    
+    /* Sidebar - Compact but readable */
     [data-testid="stSidebar"] {
-        font-size: 11px !important;
-    }
-    [data-testid="stSidebar"] * {
-        font-size: 11px !important;
-    }
-    [data-testid="stSidebar"] h1,
-    [data-testid="stSidebar"] h2,
-    [data-testid="stSidebar"] h3 {
-        font-size: 13px !important;
-        font-weight: 600 !important;
-        margin: 3px 0 !important;
-    }
-    [data-testid="stSidebar"] [data-testid="stMetricValue"] {
-        font-size: 18px !important;
-    }
-    [data-testid="stSidebar"] [data-testid="stMetricLabel"] {
-        font-size: 10px !important;
-    }
-    
-    /* Main content headers - moderate */
-    .main h1 {
-        font-size: 22px !important;
-    }
-    .main h2 {
-        font-size: 20px !important;
-    }
-    .main h3 {
-        font-size: 18px !important;
-        font-weight: 700 !important;
-        color: #2c3e50 !important;
-        margin-top: 25px !important;
-    }
-    .main h4 {
-        font-size: 16px !important;
-        font-weight: 600 !important;
-        color: #34495e !important;
-    }
-    
-    /* Tabs smaller */
-    .stTabs [data-baseweb="tab"] {
         font-size: 14px !important;
     }
+    [data-testid="stSidebar"] * {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+    }
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2 {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        margin: 10px 0 8px 0 !important;
+        color: #2c3e50 !important;
+    }
+    [data-testid="stSidebar"] h3 {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        margin: 8px 0 6px 0 !important;
+        color: #34495e !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stMetricValue"] {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stMetricLabel"] {
+        font-size: 13px !important;
+        font-weight: 500 !important;
+    }
     
+    /* Main content - Clear hierarchy */
+    .main {
+        font-size: 16px !important;
+    }
+    
+    .main h1 {
+        font-size: 32px !important;
+        font-weight: 700 !important;
+        color: #1a1a1a !important;
+        margin: 30px 0 15px 0 !important;
+        line-height: 1.2 !important;
+    }
+    
+    .main h2 {
+        font-size: 26px !important;
+        font-weight: 700 !important;
+        color: #2c3e50 !important;
+        margin: 25px 0 12px 0 !important;
+        line-height: 1.3 !important;
+    }
+    
+    .main h3 {
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        color: #2c3e50 !important;
+        margin: 25px 0 15px 0 !important;
+        line-height: 1.4 !important;
+    }
+    
+    .main h4 {
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        color: #34495e !important;
+        margin: 20px 0 12px 0 !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Body text */
+    .main p, .main label {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        color: #4a5568 !important;
+    }
+    
+    /* Tabs - Clear and accessible */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2px !important;
+        border-bottom: 2px solid #e2e8f0 !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        padding: 12px 24px !important;
+        color: #64748b !important;
+    }
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
+        color: #1f77b4 !important;
+        border-bottom: 3px solid #1f77b4 !important;
+    }
+    
+    /* Buttons - Accessible size */
     .stButton>button {
-        background-color: #1f77b4;
-        color: white;
-        font-weight: 600;
-        border-radius: 8px;
+        background-color: #1f77b4 !important;
+        color: white !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        padding: 12px 24px !important;
+        border-radius: 8px !important;
+        border: none !important;
+        transition: all 0.2s ease !important;
     }
     .stButton>button:hover {
-        background-color: #1557b0;
+        background-color: #1557b0 !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(31, 119, 180, 0.3) !important;
+    }
+    
+    /* Input fields - Better spacing */
+    .stTextInput input,
+    .stNumberInput input,
+    .stSelectbox select {
+        font-size: 15px !important;
+        padding: 10px 12px !important;
+    }
+    
+    /* Metrics - Visual hierarchy */
+    [data-testid="stMetric"] {
+        background-color: #f8fafc !important;
+        padding: 16px !important;
+        border-radius: 8px !important;
+        border-left: 4px solid #1f77b4 !important;
+    }
+    [data-testid="stMetricLabel"] {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        color: #64748b !important;
+    }
+    [data-testid="stMetricValue"] {
+        font-size: 28px !important;
+        font-weight: 700 !important;
+        color: #1a1a1a !important;
+    }
+    
+    /* Dividers - Subtle separation */
+    hr {
+        margin: 30px 0 !important;
+        border-color: #e2e8f0 !important;
+    }
+    
+    /* Expander - Clear affordance */
+    .streamlit-expanderHeader {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #2c3e50 !important;
+    }
+    
+    /* Info boxes */
+    .stAlert {
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+        padding: 16px !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Captions - Subtle text */
+    .caption {
+        font-size: 13px !important;
+        color: #718096 !important;
+        line-height: 1.4 !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# MASSIVE TITLE - Direct HTML
+# TITLE - Proper size with good hierarchy
 st.markdown("""
-<div style="text-align: center; margin: 40px 0 20px 0;">
-    <h1 style="font-size: 80px; font-weight: 900; color: #1f77b4; margin: 0; line-height: 1; text-shadow: 4px 4px 10px rgba(0,0,0,0.2);">
+<div style="text-align: center; margin: 50px 0 30px 0;">
+    <h1 style="font-size: 64px; font-weight: 900; color: #1f77b4; margin: 0; line-height: 1.1; text-shadow: 3px 3px 8px rgba(0,0,0,0.15); letter-spacing: -1px;">
         🏦 Bank Marketing Predictor
     </h1>
-    <p style="font-size: 17px; color: #666; margin-top: 15px; font-weight: 400;">
+    <p style="font-size: 18px; color: #64748b; margin-top: 20px; font-weight: 400; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto;">
         Predict customer subscription likelihood for term deposits using machine learning
     </p>
 </div>
